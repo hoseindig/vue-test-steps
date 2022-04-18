@@ -7,7 +7,7 @@
       active-class="active"
       class="link_"
       to="/step"
-      v-if="stpes.length > 0"
+      v-if="steps.length > 0"
     >
       بررسی و تنظیم مراحل</router-link
     >
@@ -20,28 +20,28 @@ export default {
   methods: {},
   mounted() {},
   computed: {
-    stpes: {
+    steps: {
       get() {
-        return this.$store.getters.stpes;
+        return this.$store.getters.steps;
       },
       set(val) {
         this.$store.dispatch("updateAcivestep", val);
       },
     },
   },
+ 
+
 };
 </script>
 <style>
-.link_ {
-  text-decoration: none;
+@font-face {
+  font-family: "BYekan";
+  src: url("~@/assets/fonts/BYekan+.ttf");
 }
-.active {
-  background-color: blue;
-  color: #ffffff !important;
-  border-radius: 15px;
-  padding: 10px;
-  margin: 0 15px;
+* {
+  font-family: "BYekan";
 }
+
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -61,5 +61,17 @@ nav a {
 
 nav a.router-link-exact-active {
   color: #42b983;
+}
+</style>
+<style scoped>
+.link_ {
+  text-decoration: none;
+}
+.active {
+  background-color: blue;
+  color: #ffffff !important;
+  border-radius: 15px;
+  padding: 10px;
+  margin: 0 15px;
 }
 </style>
