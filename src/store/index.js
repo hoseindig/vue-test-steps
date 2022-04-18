@@ -2,14 +2,6 @@ import { createStore } from "vuex";
 
 export default createStore({
   state: {
-    stepData: [
-      { id: 1, label: "step 1", isActive: false },
-      { id: 2, label: "step 2", isActive: false },
-      { id: 3, label: "step 3", isActive: false },
-      { id: 4, label: "step 4", isActive: false },
-      { id: 5, label: "step 5", isActive: false },
-      { id: 6, label: "step 6", isActive: false },
-    ],
     stepServiceData: [
       {
         id: 1,
@@ -74,7 +66,13 @@ export default createStore({
   },
   mutations: {
     updateAcivestep: (state, payload) => {
-      state.stepServiceData[payload.selected].active = payload.activeStep;
+      debugger;
+      let stepServiceData = JSON.parse(JSON.stringify(state)).stepServiceData;
+      const index = stepServiceData.findIndex(
+        (i) => i.id === payload.selectedId
+      );
+      stepServiceData[index].active = payload.activeStep;
+      state.stepServiceData = stepServiceData;
     },
   },
   actions: {

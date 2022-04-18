@@ -1,27 +1,30 @@
 <template>
-  <h1>main step</h1>
-  <!-- <p>{{ selectedCombo }}</p> -->
-  <select name="" id="" v-model="selectedCombo">
+  <h1>نوع را انتخاب کنید</h1>
+  <select
+    name=""
+    id=""
+    v-model="selectedCombo"
+    @change="selectItemHandler(selectedCombo)"
+  >
     <option :value="item.id" v-for="item in stpes" :key="item.id">
       {{ item.title }}
     </option>
   </select>
   <div class="stepBox" v-if="selectedCombo">
     <stepBoxVue
-      v-for="(i, index) in stpes[selectedCombo].stages"
+      v-for="(i, index) in selectedItem.stages"
       :key="i"
-      :isActive="index <= stpes[selectedCombo].active"
+      :isActive="index <= selectedItem.active"
       :label="i"
       :stepNumber="index"
-      :totalStep="stpes[selectedCombo].stages.length"
-      @click="stepClickhandler(index, selectedCombo)"
+      :totalStep="selectedItem.stages.length"
+      @click="stepClickhandler(index, selectedItem.id)"
     />
   </div>
 </template>
 
 <script>
 import stepBoxVue from "./stepBox.vue";
-// import { mapGetters } from "vuex";
 export default {
   components: {
     stepBoxVue,
@@ -40,12 +43,25 @@ export default {
         this.$store.dispatch("updateAcivestep", val);
       },
     },
+    selectedItem() {
+      if (this.selectedCombo)
+        return this.$store.getters.stpes.find(
+          (i) => i.id === this.selectedCombo
+        );
+      else return null;
+    },
   },
+
   methods: {
-    stepClickhandler(step, selected) {
+    selectItemHandler(id) {
+      this.selectedItem = JSON.parse(JSON.stringify(this.stpes)).find(
+        (i) => i.id === id
+      );
+    },
+    stepClickhandler(step, selectedId) {
       this.$store.dispatch("updateAcivestep", {
         activeStep: step,
-        selected: selected,
+        selectedId,
       });
     },
   },
@@ -54,7 +70,6 @@ export default {
 
 <style>
 .stepBox {
-  /* position: relative; */
   border: 1px solid gray;
   padding: 15px;
   margin: 10px;

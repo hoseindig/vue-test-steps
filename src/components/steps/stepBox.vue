@@ -1,6 +1,5 @@
 <template>
   <div class="box" :class="isActive ? 'active' : ''">
-    <!-- <h1>step box</h1> -->
     <div class="parent-box">
       <div class="box-inner"></div>
     </div>
@@ -19,7 +18,7 @@
         <div class="dot-inner"></div>
       </div>
     </div>
-    <div class="text-box">{{ label }} {{ stepNumber }} {{ totalStep }}</div>
+    <div class="text-box">{{ label }}</div>
   </div>
 </template>
 
