@@ -9,8 +9,7 @@
         <div class="dot-inner"></div>
       </div>
     </div>
-    <!-- <div class="line-box">----</div> -->
-    <div class="text-box">test</div>
+    <div class="text-box">{{label}}</div>
   </div>
 </template>
 
@@ -19,6 +18,10 @@ export default {
   props: {
     isActive: {
       type: Boolean,
+      require: true,
+    },
+    label: {
+      type: String,
       require: true,
     },
   },
