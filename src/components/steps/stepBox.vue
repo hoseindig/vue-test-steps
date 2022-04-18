@@ -1,5 +1,5 @@
 <template>
-  <div class="box">
+  <div class="box" :class="isActive ? 'active' : ''">
     <!-- <h1>step box</h1> -->
     <div class="parent-box">
       <div class="box-inner"></div>
@@ -33,6 +33,23 @@ $step_size: 125px;
 $innter_step_size: $step_size - 9;
 $dot_size: 20px;
 $boader_size: 5px;
+
+.active {
+  .parent-box {
+    border: $boader_size solid $active_color;
+    .box-inner {
+      background-color: $active_color;
+    }
+    &:after {
+      border-top: 20px solid $active_color;
+    }
+  }
+  .dot-box {
+    .dot-out {
+      border: $boader_size solid $active_color;
+    }
+  }
+}
 .box {
   width: $step_size + 35;
   height: $step_size + 135;
