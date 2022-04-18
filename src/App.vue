@@ -1,7 +1,16 @@
 <template>
   <nav>
-    <router-link to="/">Home</router-link> |
-    <router-link to="/step" v-if="stpes.length > 0">Step</router-link>
+    <router-link active-class="active" class="link_" to="/"
+      >صفحه اول</router-link
+    >
+    <router-link
+      active-class="active"
+      class="link_"
+      to="/step"
+      v-if="stpes.length > 0"
+    >
+      بررسی و تنظیم مراحل</router-link
+    >
   </nav>
   <router-view />
 </template>
@@ -23,6 +32,16 @@ export default {
 };
 </script>
 <style>
+.link_ {
+  text-decoration: none;
+}
+.active {
+  background-color: blue;
+  color: #ffffff !important;
+  border-radius: 15px;
+  padding: 10px;
+  margin: 0 15px;
+}
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
