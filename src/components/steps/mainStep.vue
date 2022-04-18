@@ -1,42 +1,50 @@
 <template>
   <h1>main step</h1>
-  <div class="stepBox">
+  <!-- <p>{{ selectedCombo }}</p> -->
+  <select name="" id="" v-model="selectedCombo">
+    <option :value="item.id" v-for="item in stpes" :key="item.id">
+      {{ item.title }}
+    </option>
+  </select>
+  <div class="stepBox" v-if="selectedCombo">
     <stepBoxVue
-      v-for="i in stpes"
-      :key="i.id"
-      :isActive="i.isActive"
-      :label="i.label"
-      @click="stepClickhandler(i.id)"
+      v-for="(i, index) in stpes[selectedCombo].stages"
+      :key="i"
+      :isActive="index <= stpes[selectedCombo].active"
+      :label="i"
+      @click="stepClickhandler(index, selectedCombo)"
     />
   </div>
 </template>
 
 <script>
 import stepBoxVue from "./stepBox.vue";
+// import { mapGetters } from "vuex";
 export default {
   components: {
     stepBoxVue,
   },
   data() {
     return {
-      stpes: [
-        { id: 1, label: "step 1", isActive: false },
-        { id: 2, label: "step 2", isActive: false },
-        { id: 3, label: "step 3", isActive: false },
-        { id: 4, label: "step 4", isActive: false },
-        { id: 5, label: "step 5", isActive: false },
-        { id: 6, label: "step 6", isActive: false },
-      ],
-      currentActiceStep: null,
+      selectedCombo: null,
     };
   },
+  computed: {
+    stpes: {
+      get() {
+        return this.$store.getters.stpes;
+      },
+      set(val) {
+        this.$store.dispatch("updateAcivestep", val);
+      },
+    },
+  },
   methods: {
-    stepClickhandler(id) {
-      this.currentActiceStep = id;
-      for (let i = 0; i < this.stpes.length; i++) {
-        if (id >= this.stpes[i].id) this.stpes[i].isActive = true;
-        else this.stpes[i].isActive = false;
-      }
+    stepClickhandler(step, selected) {
+      this.$store.dispatch("updateAcivestep", {
+        activeStep: step,
+        selected: selected,
+      });
     },
   },
 };
@@ -45,6 +53,9 @@ export default {
 <style>
 .stepBox {
   /* position: relative; */
+  border: 1px solid gray;
+  padding: 15px;
+  margin: 10px;
   display: flex;
 }
 </style>
