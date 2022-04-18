@@ -12,6 +12,8 @@
       :key="i"
       :isActive="index <= stpes[selectedCombo].active"
       :label="i"
+      :stepNumber="index"
+      :totalStep="stpes[selectedCombo].stages.length"
       @click="stepClickhandler(index, selectedCombo)"
     />
   </div>

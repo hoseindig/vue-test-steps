@@ -4,12 +4,22 @@
     <div class="parent-box">
       <div class="box-inner"></div>
     </div>
+    <div
+      class="line"
+      :class="
+        stepNumber + 1 === totalStep
+          ? 'fisrt-step'
+          : stepNumber === 0
+          ? 'last-step'
+          : ''
+      "
+    ></div>
     <div class="dot-box">
       <div class="dot-out">
         <div class="dot-inner"></div>
       </div>
     </div>
-    <div class="text-box">{{label}}</div>
+    <div class="text-box">{{ label }} {{ stepNumber }} {{ totalStep }}</div>
   </div>
 </template>
 
@@ -18,6 +28,14 @@ export default {
   props: {
     isActive: {
       type: Boolean,
+      require: true,
+    },
+    stepNumber: {
+      type: Number,
+      require: true,
+    },
+    totalStep: {
+      type: Number,
       require: true,
     },
     label: {
@@ -53,6 +71,15 @@ $boader_size: 5px;
     }
   }
 }
+
+.fisrt-step {
+  width: 47% !important;
+}
+.last-step {
+  width: 50% !important;
+  float: left;
+}
+
 .box {
   width: $step_size + 35;
   height: $step_size + 135;
@@ -108,5 +135,13 @@ $boader_size: 5px;
 .line-box {
   width: $step_size;
   height: $step_size;
+}
+
+.line {
+  width: 100%;
+  height: 3px;
+  background-color: $deactive_color;
+  position: relative;
+  top: 68px;
 }
 </style>
