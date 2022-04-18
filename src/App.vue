@@ -1,11 +1,27 @@
 <template>
   <nav>
     <router-link to="/">Home</router-link> |
-    <router-link to="/step">Step</router-link>
+    <router-link to="/step" v-if="stpes.length > 0">Step</router-link>
   </nav>
   <router-view />
 </template>
 
+<script>
+export default {
+  methods: {},
+  mounted() {},
+  computed: {
+    stpes: {
+      get() {
+        return this.$store.getters.stpes;
+      },
+      set(val) {
+        this.$store.dispatch("updateAcivestep", val);
+      },
+    },
+  },
+};
+</script>
 <style>
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;

@@ -2,7 +2,8 @@ import { createStore } from "vuex";
 
 export default createStore({
   state: {
-    stepServiceData: [
+    steps: [],
+    /*[
       {
         id: 1,
         title: "کارشناس منابع انسانی",
@@ -57,27 +58,33 @@ export default createStore({
         ],
         active: 3,
       },
-    ],
+    ],*/
   },
   getters: {
     stpes(state) {
-      return state.stepServiceData;
+      return state.steps;
     },
   },
   mutations: {
     updateAcivestep: (state, payload) => {
       debugger;
-      let stepServiceData = JSON.parse(JSON.stringify(state)).stepServiceData;
-      const index = stepServiceData.findIndex(
-        (i) => i.id === payload.selectedId
-      );
-      stepServiceData[index].active = payload.activeStep;
-      state.stepServiceData = stepServiceData;
+      let stpes = JSON.parse(JSON.stringify(state)).stpes;
+      const index = stpes.findIndex((i) => i.id === payload.selectedId);
+      stpes[index].active = payload.activeStep;
+      state.steps = stpes;
+    },
+    setStepsData: (state, payload) => {
+      debugger;
+      if (payload.length > 0) state.steps = payload;
+      else alert("data error");
     },
   },
   actions: {
     updateAcivestep: ({ commit }, payload) => {
       commit("updateAcivestep", payload);
+    },
+    setStepsData: ({ commit }, payload) => {
+      commit("setStepsData", payload);
     },
   },
   modules: {},
