@@ -61,20 +61,18 @@ export default createStore({
     ],*/
   },
   getters: {
-    stpes(state) {
+    steps(state) {
       return state.steps;
     },
   },
   mutations: {
     updateAcivestep: (state, payload) => {
-      debugger;
-      let stpes = JSON.parse(JSON.stringify(state)).stpes;
-      const index = stpes.findIndex((i) => i.id === payload.selectedId);
-      stpes[index].active = payload.activeStep;
-      state.steps = stpes;
+      let steps = JSON.parse(JSON.stringify(state)).steps;
+      const index = steps.findIndex((i) => i.id === payload.selectedId);
+      steps[index].active = payload.activeStep;
+      state.steps = steps;
     },
     setStepsData: (state, payload) => {
-      debugger;
       if (payload.length > 0) state.steps = payload;
       else alert("data error");
     },

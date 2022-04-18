@@ -1,6 +1,7 @@
 import mainPageVue from "@/components/mainPage.vue";
 import { createRouter, createWebHistory } from "vue-router";
 import mainStepVue from "../components/steps/mainStep.vue";
+import notFound from "../components/notFound.vue";
 const routes = [
   {
     path: "/",
@@ -12,6 +13,8 @@ const routes = [
     name: "step",
     component: mainStepVue,
   },
+  { path: "/404", component: notFound },
+  { path: "/:catchAll(.*)", redirect: "/404" },
   {
     path: "/about",
     name: "about",

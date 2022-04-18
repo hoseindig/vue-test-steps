@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div v-if="stpes.length === 0">
+    <div v-if="steps.length === 0">
       <h1 class="alert">لطفا برای ادامه برروی دریافت اطلاعات کلیک کنید</h1>
       <button @click="getData()">دریافت اطلاعات</button>
     </div>
@@ -15,7 +15,6 @@ export default {
   methods: {
     getData() {
       this.axios.get("https://hire.camp/api/job/list").then((response) => {
-        debugger;
         if (response && response.data && response.data.length > 0)
           this.$store.dispatch("setStepsData", response.data);
         else alert("data error");
@@ -24,9 +23,9 @@ export default {
     },
   },
   computed: {
-    stpes: {
+    steps: {
       get() {
-        return this.$store.getters.stpes;
+        return this.$store.getters.steps;
       },
       set(val) {
         this.$store.dispatch("updateAcivestep", val);

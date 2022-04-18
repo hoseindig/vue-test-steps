@@ -6,7 +6,7 @@
     v-model="selectedCombo"
     @change="selectItemHandler(selectedCombo)"
   >
-    <option :value="item.id" v-for="item in stpes" :key="item.id">
+    <option :value="item.id" v-for="item in steps" :key="item.id">
       {{ item.title }}
     </option>
   </select>
@@ -35,9 +35,9 @@ export default {
     };
   },
   computed: {
-    stpes: {
+    steps: {
       get() {
-        return this.$store.getters.stpes;
+        return this.$store.getters.steps;
       },
       set(val) {
         this.$store.dispatch("updateAcivestep", val);
@@ -45,7 +45,7 @@ export default {
     },
     selectedItem() {
       if (this.selectedCombo)
-        return this.$store.getters.stpes.find(
+        return this.$store.getters.steps.find(
           (i) => i.id === this.selectedCombo
         );
       else return null;
@@ -54,7 +54,7 @@ export default {
 
   methods: {
     selectItemHandler(id) {
-      this.selectedItem = JSON.parse(JSON.stringify(this.stpes)).find(
+      this.selectedItem = JSON.parse(JSON.stringify(this.steps)).find(
         (i) => i.id === id
       );
     },
@@ -64,6 +64,13 @@ export default {
         selectedId,
       });
     },
+  },
+  beforeRouteEnter(to, from, next) {
+    console.log("beforeRouteEnter");
+    next();
+  },
+  mounted() {
+    if (this.steps.length === 0) this.$router.push("/");
   },
 };
 </script>
